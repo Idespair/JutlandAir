@@ -14,7 +14,6 @@ public class Seat {
     @JoinColumn(name = "plane_id")
     private Plane planeAssigned;
 
-    @OneToOne
-    @JoinColumn(name = "reservation_id")
+    @OneToOne(mappedBy = "seatAssigned")
     private Reservation reservation;
 }

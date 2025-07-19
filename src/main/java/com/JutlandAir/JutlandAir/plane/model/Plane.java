@@ -1,13 +1,16 @@
 package com.JutlandAir.JutlandAir.plane.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.JutlandAir.JutlandAir.client.model.Seat;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "planes")
 public class Plane {
 
-    private String Id;
+    @Id
+    private String id;
 
     private String name;
 
@@ -17,8 +20,11 @@ public class Plane {
 
     private float hoursFlown;
 
-    private int seats;
+    private int NumberOfSeats;
 
     private boolean airworthy;
+
+    @OneToMany(mappedBy = "planeAssigned")
+    private List<Seat> seats;
 
 }

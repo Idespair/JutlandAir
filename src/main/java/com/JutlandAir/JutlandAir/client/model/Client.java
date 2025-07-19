@@ -5,6 +5,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.List;
+
 @Entity
 @Table(name = "clients")
 public class Client {
@@ -24,9 +26,7 @@ public class Client {
 
     private String document;
 
-    @OneToMany
-    private Reservation reservations;
-
-
+    @OneToMany(mappedBy = "passenger")
+    private List<Reservation> reservations;
 
 }

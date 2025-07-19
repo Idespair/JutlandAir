@@ -1,8 +1,6 @@
 package com.JutlandAir.JutlandAir.client.model;
 
-import com.JutlandAir.JutlandAir.plane.model.Plane;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,10 +15,6 @@ public class Reservation {
     @OneToOne
     @JoinColumn(name = "client_id")
     private Client passenger;
-
-    @OneToOne
-    @JoinColumn(name = "plane_id", unique = true)
-    private Plane planeUsed;
 
     @OneToOne
     @JoinColumn(name = "seat_id", unique = true)
