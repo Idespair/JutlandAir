@@ -1,6 +1,7 @@
 package com.JutlandAir.JutlandAir.client.dto;
 
 import com.JutlandAir.JutlandAir.client.model.Client;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ClientDTO {
 
     private String id;
@@ -19,13 +21,4 @@ public class ClientDTO {
     private String email;
 
     private String countryOfBirth;
-
-    public ClientDTO(Client client) {
-        this.id = client.getId();
-        this.name = client.getName();
-        this.lastName = client.getLastName();
-        this.email = client.getEmail();
-        this.countryOfBirth = client.getCountryOfBirth();
-    }
-
 }
