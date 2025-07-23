@@ -24,6 +24,8 @@ public class Client {
 
     private String lastName;
 
+    private String gender;
+
     private String email;
 
     private String password;
