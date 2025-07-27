@@ -2,26 +2,39 @@ package com.JutlandAir.JutlandAir.plane.model;
 
 import com.JutlandAir.JutlandAir.client.model.Seat;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "planes")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = "seats")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Plane {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(nullable = false, unique = true)
+    private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Model model;
 
-    private String ICAOCode;
-
+    @Column(nullable = false)
     private String countryOfRegistration;
 
+    @Column(nullable = false)
     private float hoursFlown;
 
-    private int NumberOfSeats;
+    @Column(nullable = false)
+    private int numberOfSeats;
 
+    @Column(nullable = false)
     private boolean airworthy;
 
     @OneToMany(mappedBy = "planeAssigned")
