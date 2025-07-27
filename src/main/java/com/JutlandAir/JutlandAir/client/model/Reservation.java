@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "reservations")
@@ -15,11 +17,15 @@ import java.time.LocalDateTime;
 public class Reservation {
 
     @Id
-    private String id;
+    @GeneratedValue
+    @org.hibernate.annotations.UuidGenerator
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
-    private LocalDateTime reservationDate;
+    @Column(nullable = false)
+    private Instant reservationDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "client_id")
     private Client passenger;
 
