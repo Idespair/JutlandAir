@@ -1,4 +1,4 @@
-package com.JutlandAir.JutlandAir.client.dto;
+package com.JutlandAir.JutlandAir.client.dto.output;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
