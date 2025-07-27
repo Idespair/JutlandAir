@@ -1,14 +1,14 @@
 package com.JutlandAir.JutlandAir.client.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "clients")
@@ -18,23 +18,34 @@ import java.util.List;
 public class Client {
 
     @Id
-    private String id;
+    @GeneratedValue
+    @org.hibernate.annotations.UuidGenerator
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String lastName;
 
-    private String gender;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String countryOfBirth;
 
-    private String document;
+    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(9)")
+    private String passport;
 
     @OneToMany(mappedBy = "passenger")
-    private List<Reservation> reservations;
+    private List<Reservation> reservations = new ArrayList<>();
 
 }
