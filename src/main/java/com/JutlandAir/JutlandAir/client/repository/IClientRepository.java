@@ -4,9 +4,11 @@ import com.JutlandAir.JutlandAir.client.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface IClientRepository extends JpaRepository<Client, String> {
+public interface IClientRepository extends JpaRepository<Client, UUID> {
+    void deleteById(UUID id);
 
+    boolean existsById(UUID id);
 }
