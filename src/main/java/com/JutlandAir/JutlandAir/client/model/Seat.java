@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "seats")
 @Getter
@@ -14,8 +16,12 @@ import lombok.Setter;
 public class Seat {
 
     @Id
-    private String id;
+    @GeneratedValue
+    @org.hibernate.annotations.UuidGenerator
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
+    @Column(nullable = false, columnDefinition = "VARCHAR(4)")
     private String seatNumber;
 
     @OneToOne
