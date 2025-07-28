@@ -18,7 +18,7 @@ public class Seat {
     @Id
     @GeneratedValue
     @org.hibernate.annotations.UuidGenerator
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false)
     private UUID id;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(4)")
