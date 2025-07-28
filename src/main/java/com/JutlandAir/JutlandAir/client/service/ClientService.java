@@ -27,12 +27,12 @@ public class ClientService {
 
     public ClientResponse createClient(ClientRequest clientRequest) {
         Client client = new Client();
-        client.setId(clientRequest.getId());
         client.setName(clientRequest.getName());
         client.setLastName(clientRequest.getLastName());
         client.setEmail(clientRequest.getEmail());
         client.setGender(clientRequest.getGender());
         client.setCountryOfBirth(clientRequest.getCountryOfBirth());
+        client.setPassport(clientRequest.getPassport());
         client.setPassword(passwordEncoder.encode(clientRequest.getPassword()));
         client = clientRepository.save(client);
         return clientToDTO(client);
@@ -47,8 +47,8 @@ public class ClientService {
     }
 
     private ClientResponse clientToDTO(Client client){
-        return new ClientResponse(client.getId(), client.getName(), client.getLastName(),
-                client.getGender(), client.getEmail(), client.getCountryOfBirth());
+        return new ClientResponse(client.getId(),client.getName(), client.getLastName(),
+                client.getGender(), client.getEmail(), client.getCountryOfBirth(), client.getPassport());
     }
 
 }

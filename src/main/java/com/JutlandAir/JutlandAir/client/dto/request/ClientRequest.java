@@ -18,9 +18,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ClientRequest {
 
-    @NotNull
-    private UUID id;
-
     @NotBlank
     private String name;
 
@@ -36,6 +33,9 @@ public class ClientRequest {
 
     @NotBlank
     private String countryOfBirth;
+
+    @NotBlank
+    private String passport;
 
     @NotBlank
     @Size(min = 8, message = "Password must be at least 8 characters")

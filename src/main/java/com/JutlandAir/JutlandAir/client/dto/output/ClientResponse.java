@@ -34,5 +34,8 @@ public class ClientResponse {
     private String email;
 
     @NotBlank
+    private String passport;
+
+    @NotBlank
     private String countryOfBirth;
 }
