@@ -1,6 +1,5 @@
 package com.JutlandAir.JutlandAir.plane.model;
 
-import com.JutlandAir.JutlandAir.client.model.Seat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +11,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "seats")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Plane {
 
@@ -36,8 +34,4 @@ public class Plane {
 
     @Column(nullable = false)
     private boolean airworthy;
-
-    @OneToMany(mappedBy = "planeAssigned")
-    private List<Seat> seats;
-
 }
