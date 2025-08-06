@@ -4,8 +4,8 @@ import com.JutlandAir.JutlandAir.client.dto.output.ClientResponse;
 import com.JutlandAir.JutlandAir.client.dto.request.ClientRequest;
 import com.JutlandAir.JutlandAir.client.model.Client;
 import com.JutlandAir.JutlandAir.client.repository.IClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,13 @@ import java.util.UUID;
 @Service
 public class ClientService {
 
-    @Autowired
-    private IClientRepository clientRepository;
+    private final IClientRepository clientRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public ClientService(PasswordEncoder passwordEncoder, IClientRepository clientRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.clientRepository = clientRepository;
+    }
 
     public List<Client> allClients(){
         return clientRepository.findAll();
@@ -38,12 +40,22 @@ public class ClientService {
         return clientToDTO(client);
     }
 
-    public ResponseEntity<String> deleteUserByID(UUID id){
+    public boolean deleteUserByID(UUID id){
         if (clientRepository.existsById(id)) {
             clientRepository.deleteById(id);
-            return ResponseEntity.ok("User deleted");
+            return true;
         }
-        return ResponseEntity.ok("User not found");
+        return false;
+    }
+
+    public Page<ClientResponse> findAll (Pageable pageable){
+        Page<Client> clients = clientRepository.findAll(pageable);
+        return clients.map(this::clientToDTO);
+    }
+
+    public Page<ClientResponse> findByName(String name, Pageable pageable){
+        Page<Client> clients = clientRepository.findByNameContainingIgnoreCase(name, pageable);
+        return clients.map(this::clientToDTO);
     }
 
     private ClientResponse clientToDTO(Client client){
