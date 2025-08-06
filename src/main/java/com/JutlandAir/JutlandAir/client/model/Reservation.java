@@ -22,14 +22,10 @@ public class Reservation {
     private UUID id;
 
     @Column(nullable = false)
-    private Instant reservationDate;
+    private Instant creationDate;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client passenger;
-
-    @OneToOne
-    @JoinColumn(name = "seat_id", unique = true)
-    private Seat seatAssigned;
 
 }
